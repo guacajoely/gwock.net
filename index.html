@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Terminal</title>
+</head>
+
+<body>
+    <div id="terminal">
+        <div id="output"></div>
+        <div id="input-line">
+            <span id="prompt">></span>
+            <input type="text" id="input" autofocus>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+
+<style>
+    body {
+        font-family: "Consolas", monospace;
+        background-color: #000;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    * {
+        font-size: 14px;
+    }
+
+    #terminal {
+        width: 80%;
+        max-width: 800px;
+        background-color: #111;
+        padding: 10px;
+        border-radius: 25px;
+        box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+    }
+
+    #output {
+        height: 70dvh;
+        max-height: 600px;
+        overflow-y: auto;
+        /* Make the output scrollable */
+        margin-bottom: 10px;
+        white-space: pre-wrap;
+        padding: 5px;
+    }
+
+    /* Hide scrollbar for Chrome, Safari, and Opera */
+    #output::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge, and Firefox */
+    #output {
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+    }
+
+    #input-line {
+        display: flex;
+    }
+
+    #prompt {
+        margin-right: 5px;
+    }
+
+    #input {
+        flex-grow: 1;
+        background: none;
+        border: none;
+        color: inherit;
+        font-family: inherit;
+        outline: none;
+        font-size: 1rem;
+    }
+</style>
+
+
+
+<script>
+    const terminalOutput = document.getElementById('output');
+    const inputField = document.getElementById('input');
+
+    const commands = {
+        clear: () => {
+            terminalOutput.innerHTML = '';
+        },
+        help: () => {
+            terminalOutput.innerHTML += 'Available commands:\n- clear: Clears the terminal\n';
+        }
+    };
+
+    // Focus on the input field when the page loads
+    inputField.focus();
+
+    // Focus on the input field when clicking anywhere on the page
+    document.addEventListener('click', function () {
+        inputField.focus();
+    });
+
+    inputField.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            const input = inputField.value.trim();
+            terminalOutput.innerHTML += '> ' + input + '\n';
+            inputField.value = '';
+
+            if (commands[input]) {
+                commands[input]();
+            } else {
+                terminalOutput.innerHTML += `'${input}' is not a recognized command.\nUse "help" to view a list of valid commands.`;
+            }
+
+            terminalOutput.scrollTop = terminalOutput.scrollHeight; // Scroll to bottom
+        }
+    });
+</script>
