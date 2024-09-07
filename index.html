@@ -56,7 +56,7 @@
     }
 
     #output {
-        height: 65vh;
+        min-height: 60vh;
         max-height: 600px;
         overflow-y: auto;
         /* Make the output scrollable */
@@ -140,12 +140,12 @@
     });
 
 
-    // function adjustHeight() {
-    //     const windowHeight = window.innerHeight;
-    //     document.querySelector('#output').style.height = `${windowHeight * 0.65}px`; // Set height to 65% of viewport
-    // }
+    function adjustHeight() {
+        const windowHeight = window.innerHeight;
+        document.querySelector('#output').style.height = `${windowHeight * 0.60}px`; // Set height to 65% of viewport
+    }
 
-    // window.addEventListener('resize', adjustHeight);
-    // window.addEventListener('load', adjustHeight);
+    window.addEventListener('resize', adjustHeight);
+    window.addEventListener('load', adjustHeight);
 
 </script>
