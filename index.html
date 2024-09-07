@@ -122,14 +122,14 @@
 
     inputField.addEventListener('keydown', function (event) {
         if (event.key === 'Enter') {
-            const input = inputField.value.trim();
-            terminalOutput.innerHTML += '> ' + input + '\n';
+            const input = inputField.value.trim().toLowerCase(); // Convert input to lowercase
+            terminalOutput.innerHTML += '> ' + inputField.value.trim() + '\n'; // Keep the original input displayed
             inputField.value = '';
 
             if (commands[input]) {
                 commands[input]();
             } else {
-                terminalOutput.innerHTML += `'${input}' is not a recognized command.\nUse "help" to view a list of valid commands.`;
+                terminalOutput.innerHTML += `'${input}' is not a recognized command.\nUse "help" to view a list of valid commands.\n`;
             }
 
             terminalOutput.scrollTop = terminalOutput.scrollHeight; // Scroll to bottom
