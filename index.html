@@ -42,8 +42,7 @@
     a,
     a:visited,
     a:hover,
-    a:active
-    {
+    a:active {
         color: #0f0;
     }
 
@@ -57,7 +56,7 @@
     }
 
     #output {
-        height: 70dvh;
+        height: 65dvh;
         max-height: 600px;
         overflow-y: auto;
         /* Make the output scrollable */
@@ -139,4 +138,14 @@
             terminalOutput.scrollTop = terminalOutput.scrollHeight; // Scroll to bottom
         }
     });
+
+
+    function adjustHeight() {
+        const windowHeight = window.innerHeight;
+        document.querySelector('#output').style.height = `${windowHeight * 0.65}px`; // Set height to 65% of viewport
+    }
+
+    window.addEventListener('resize', adjustHeight);
+    window.addEventListener('load', adjustHeight);
+
 </script>
