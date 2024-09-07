@@ -109,9 +109,6 @@
         },
         help: () => {
             terminalOutput.innerHTML += `Available commands:\n- clear: Clears the terminal\n- socials: Displays Joel's socials\n`;
-        },
-        socials: () => {
-            terminalOutput.innerHTML += `Joel's Socials\n<a href='https://joeldick.dev' target='_blank' rel='noopener noreferrer'>joeldick.dev</a>\n<a href='https://github.com/guacajoely' target='_blank' rel='noopener noreferrer'>github</a>\n<a href='https://bsky.app/profile/guacajoely.com' target='_blank' rel='noopener noreferrer'>bluesky</a>\n<a href='https://x.com/guaca_joely' target='_blank' rel='noopener noreferrer'>X</a>\n<a href='https://www.linkedin.com/in/joeldick2/' target='_blank' rel='noopener noreferrer'>linkedin</a>\n<a href='https://www.reddit.com/user/guaca_joely/' target='_blank' rel='noopener noreferrer'>reddit</a>\n<a href='https://discord.com/invite/YPXVQjQCJ8' target='_blank' rel='noopener noreferrer'>discord</a>\n<a href='https://www.youtube.com/channel/UCQPd9dZlhK9aObvoQ50E4EQ' target='_blank' rel='noopener noreferrer'>youTube</a>\n<a href='https://www.twitch.tv/guaca_joely' target='_blank' rel='noopener noreferrer'>twitch</a>\n<a href='https://steamcommunity.com/profiles/76561198916477672/' target='_blank' rel='noopener noreferrer'>steam</a>\n`;
         }
     };
 
@@ -141,11 +138,18 @@
 
 
     function adjustHeight() {
-        const windowHeight = window.innerHeight;
-        document.querySelector('#output').style.height = `${windowHeight * 0.60}px`; // Set height to 65% of viewport
+        const windowHeight = window.innerHeight;  // Get current viewport height
+        const outputElement = document.querySelector('#output');
+
+        // Set the height to 60% of the viewport height
+        outputElement.style.height = `${windowHeight * 0.60}px`;
     }
 
+    // Adjust on window load and resize events
     window.addEventListener('resize', adjustHeight);
     window.addEventListener('load', adjustHeight);
+
+    // Call it once at the start, as a precaution
+    adjustHeight();
 
 </script>
